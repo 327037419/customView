@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="news_viewpage_arrays">
+        <item>首页</item>
+        <item>便签</item>
+        <item>设置</item>
+        <item>推荐</item>
+    </string-array>
+
+
+</resources>

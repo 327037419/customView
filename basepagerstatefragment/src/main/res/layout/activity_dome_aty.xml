@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_margin="10dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+
+        android:id="@+id/table_title"
+        layout="@layout/item_list_dome"></include>
+
+
+    <!--
+        android:fadingEdge="none"设置后没有阴影了
+
+        android:scrollbars="none"
+
+        不活动的时候隐藏，活动的时候也隐藏~-->
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="#999"
+        android:dividerHeight="1px"
+        android:fadingEdge="none"
+        android:scrollbars="none"></ListView>
+
+</LinearLayout>

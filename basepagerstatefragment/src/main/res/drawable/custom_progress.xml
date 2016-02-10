@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toDegrees="360" >
+    <!-- 中间 转 所以就是 50%  从0  到 一圈 就是 360度 -->
+    
+    
+    
+    <!-- innerRadiusRatio  是 控件 / 半径 
+        shape="rin 代表是 环 
+         thicknessRatio 是控件/
+         android:innerRadiusRatio 指的是控件的宽度/半径
+android:thicknessRatio 指的是控件的宽度/边框的粗细    -->
+    <shape
+        android:innerRadiusRatio="2.5"
+        android:shape="ring"
+        android:thicknessRatio="15"
+        android:useLevel="false" >
+        
+        <!--渐变   开始 懂啊 结束   扫描 -->
+        <gradient
+            android:endColor="#fff"
+            android:startColor="#f00"
+            android:type="linear" />
+    </shape>
+
+</rotate>

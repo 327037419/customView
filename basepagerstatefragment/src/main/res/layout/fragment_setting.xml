@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:lyz="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="时间设置"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+      style="@style/wide_lines"></View>
+    <com.lyz.basepagerstatefragment.view.ToggleView
+        lyz:mimages="false"
+        android:id="@+id/tomato_dome"
+        android:padding="10dp"
+        lyz:mtitle="时差特效"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        style="@style/thin_lines"></View>
+    <com.lyz.basepagerstatefragment.view.ToggleView
+        android:id="@+id/tomato_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        lyz:mimages="false"
+        lyz:mtitle="番茄时间" />
+
+    <TextView
+        android:text="声音设置"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        style="@style/wide_lines"></View>
+    <com.lyz.basepagerstatefragment.view.ToggleView
+        android:id="@+id/tomato_music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        lyz:mimages="false"
+        lyz:mtitle="提示音" />
+    <View
+        style="@style/thin_lines"></View>
+    <com.lyz.basepagerstatefragment.view.ToggleView
+        android:id="@+id/is_vibrator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        lyz:mimages="true"
+        lyz:mtitle="是否开启震动" />
+
+
+
+</LinearLayout>
