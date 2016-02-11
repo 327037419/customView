@@ -10,6 +10,8 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.lyz.mydome.utils.Logs;
+
 /**
  * ============================================================
  * <p/>
@@ -35,6 +37,7 @@ public class ParallaxView extends ListView {
     private ImageView ivHeader;
     private int originH;
     private int maxHight;
+    private DragLayoutView dragLayout;
 
     public ParallaxView(Context context) {
         super(context);
@@ -57,9 +60,12 @@ public class ParallaxView extends ListView {
         originH = ivHeader.getHeight();
     }
 
+
+
     @Override
     protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
-
+        Logs.e("ParallaxView.overScrollBy.deltaX=" + deltaX + ";scrollX=" + scrollX
+                + ";isTouchEvent=" + isTouchEvent);
 //        .1 当deltaY是负值，即下拉,同时isTouchEvent为true，
 // 即是用户发起的滚动事件。则把deltaY的绝对值，添加到Header的高度上
 //        Logs.e("ParallaxView.overScrollBy.deltaY="+deltaY+";scrollY="+scrollY
@@ -84,7 +90,7 @@ public class ParallaxView extends ListView {
 
         switch (ev.getAction()){
             case MotionEvent.ACTION_DOWN:
-                getParent().requestDisallowInterceptTouchEvent(true);//不要拦截我的事件
+//                getParent().requestDisallowInterceptTouchEvent(true);//不要拦截我的事件 ,这里加了这句话导致了,一直都把父类的事件给抢了, 即使下面 我super点 也没有给父类事件,去掉就好使了
                 break;
             case MotionEvent.ACTION_MOVE:
 
@@ -103,7 +109,7 @@ public class ParallaxView extends ListView {
                         requestLayout();
                     }
                 });
-                    va.setInterpolator(new OvershootInterpolator(4)); //更有弹性
+                va.setInterpolator(new OvershootInterpolator(4)); //更有弹性
                 va.setDuration(500);
                 va.start(); //必须地start 才会开始
         }
@@ -114,5 +120,9 @@ public class ParallaxView extends ListView {
     public int evaluate(float fraction, Number startValue, Number endValue) {
         float startFloat = startValue.floatValue();
         return (int) (startFloat + fraction * (endValue.floatValue() - startFloat));
+    }
+
+    public void getDragLayout(DragLayoutView dragLayout) {
+        this.dragLayout=dragLayout;
     }
 }

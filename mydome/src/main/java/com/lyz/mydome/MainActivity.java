@@ -17,9 +17,10 @@ import com.lyz.mydome.quickmain.Man;
 import com.lyz.mydome.utils.Cheeses;
 import com.lyz.mydome.utils.Logs;
 import com.lyz.mydome.utils.UtilsToast;
-import com.lyz.mydome.view.DragLayout;
+import com.lyz.mydome.view.DragLayoutView;
 import com.lyz.mydome.view.ParallaxView;
 import com.lyz.mydome.view.QuickIndexView;
+import com.lyz.mydome.view.RelativeLayoutView;
 
 /**
  * 时差特效 listview
@@ -49,31 +50,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DragLayout dragLayout = (DragLayout) findViewById(R.id.draglayout);
-        dragLayout.setOnDragStatusChangeListener(new DragLayout.OnDragStatusChangeListener() {
+        DragLayoutView dragLayout = (DragLayoutView) findViewById(R.id.draglayout);
+        dragLayout.setDragStatusChangeListener(new DragLayoutView.OnDragStatusChangeListener() {
             @Override
-            public void OnClose() {
-//                ObjectAnimator obj = ObjectAnimator.ofFloat(iv_header, "translationX", 0, 3f);
-//                obj.setDuration(500);
-//                obj.setInterpolator(new CycleInterpolator(6));
-//                obj.start();
+            public void onClosed() {
+
                 UtilsToast.showToast(getApplicationContext(), "OnClose");
             }
 
             @Override
-            public void OnOpened() {
+            public void onOpened() {
                 UtilsToast.showToast(getApplicationContext(), "OnOpened");
             }
 
             @Override
             public void onDraging(float percent) {
                 UtilsToast.showToast(getApplicationContext(), "onDraging,percent=" + percent);
-//                ViewHelper.setAlpha(iv_header, 1 - percent);//让他上来时 1- 0.0001, 上来就是1, 越拉越没了,
             }
+
         });
-
-
-
 
         handler = new Handler();
 
@@ -88,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         quick_letter.setQuickletterlistener(new QuickIndexView.OnQuickLetterListener() {
-//            5.4 当滑动的时候显示字母弹窗
+            //            5.4 当滑动的时候显示字母弹窗
 //            5.4.1 在界面里增加一个在屏幕中间的TextView
 //            5.4.2 当监听被回调的时候显示TextView
 //            5.4.3 显示的时候发送延迟消息，两秒后隐藏TextView
@@ -97,15 +92,14 @@ public class MainActivity extends AppCompatActivity {
             public void LetterChange(String letter) {
 //                UtilsToast.showToast(MainActivity.this,"选中的字体是:"+letter);
                 for (int i = 1; i < parallaxlistView.getCount(); i++) {//i 从1 开始 , 因为0 是 头布局 图片
-                     Man man = (Man) parallaxlistView.getItemAtPosition(i);
+                    Man man = (Man) parallaxlistView.getItemAtPosition(i);
                     String manLetter = String.valueOf(man.getLetter());
 
-                    if (TextUtils.equals(manLetter,letter)){
+                    if (TextUtils.equals(manLetter, letter)) {
                         parallaxlistView.setSelection(i);  //一个 0 , 就是一个 item 就是一个 字母 加 字体,默认有一个头图片是0索引
                         break;//接收循环
                     }
                 }
-
 
 
                 handler.removeCallbacksAndMessages(null);
@@ -127,9 +121,17 @@ public class MainActivity extends AppCompatActivity {
         parallaxlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Logs.e("我点击的索引是:="+position);
+                Logs.e("我点击的索引是:=" + position);
             }
         });
+        parallaxlistView.getDragLayout(dragLayout);
+
+
+        RelativeLayoutView layout_content = (RelativeLayoutView) findViewById(R.id.layout_content);
+
+        layout_content.setDragLayout(dragLayout);
+
+//         左侧listView
 
     }
 

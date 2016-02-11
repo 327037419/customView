@@ -33,6 +33,9 @@ import com.lyz.mydome.utils.Cheeses;
 public class QuickIndexView extends View {
 
 
+
+
+
     private Paint paint;
     private int mWidth;
     private int mHight;
@@ -140,12 +143,11 @@ public class QuickIndexView extends View {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                getParent().requestDisallowInterceptTouchEvent(true);//不要拦截我的事件
             case MotionEvent.ACTION_MOVE:
-
+                getParent().requestDisallowInterceptTouchEvent(true);//不要拦截我的事件
                 int preIndex = index;
 
                 float y = event.getY();

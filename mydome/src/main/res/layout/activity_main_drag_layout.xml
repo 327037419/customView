@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.lyz.mydome.view.DragLayoutView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/domeDrag"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/domeDrag"
     android:background="@drawable/bg"
     tools:context="com.lyz.mydome.MainDragLayout">
 
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="#ff0"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
 
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:background="#f00"
-            android:text="侧拉面板"
-                android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="侧拉面板" />
     </LinearLayout>
-    <LinearLayout
-        android:background="#000"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:background="#f0f"
-            android:text="主内容面板"
-            android:layout_marginTop="150dp"
+    <com.lyz.mydome.view.LinearLayoutDome
+        android:id="@+id/layout_content_dome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="#18B4ED"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_height="40dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/header" />
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="主内容面板"
+                android:textColor="#fff" />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list_view_dome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></ListView>
+    </com.lyz.mydome.view.LinearLayoutDome>
 
 </com.lyz.mydome.view.DragLayoutView>

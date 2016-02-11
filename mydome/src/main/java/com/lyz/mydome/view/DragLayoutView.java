@@ -40,9 +40,9 @@ public class DragLayoutView extends FrameLayout {
     private int mWidth;
     private int mHeight;
     private int mRange;
-    private Status status = Status.CLOSED;
+    public Status status = Status.CLOSED;
 
-    private enum Status {
+    public enum Status {
         CLOSED, OPENED, DRAGING;
     }
 
@@ -239,36 +239,39 @@ public class DragLayoutView extends FrameLayout {
 
     private void animChange(float percent) {
 //        主内容上下 整体 缩放从 0.8
-        ViewHelper.setScaleX(mContentView,evaluate(percent,1.0,0.8));
-        ViewHelper.setScaleY(mContentView,evaluate(percent,1.0,0.8));
+        ViewHelper.setScaleX(mContentView, evaluate(percent, 1.0, 0.8));
+        ViewHelper.setScaleY(mContentView, evaluate(percent, 1.0, 0.8));
 
         // 根据面板展开的百分比，平移侧滑菜单
 //        16.3.2 左面板  a 缩放、b 平移、c 透明度动画
 //        // 缩放
-       float scaleLeft= evaluate(percent,0.5f,1.0f);
-        ViewHelper.setScaleX(mLeftView,scaleLeft);
-        ViewHelper.setScaleY(mLeftView,scaleLeft);
+        float scaleLeft = evaluate(percent, 0.5f, 1.0f);
+        ViewHelper.setScaleX(mLeftView, scaleLeft);
+        ViewHelper.setScaleY(mLeftView, scaleLeft);
 
         //平移
-        float translationX= evaluate(percent,-mRange,0);
-        ViewHelper.setTranslationX(mLeftView,translationX);
+        float translationX = evaluate(percent, -mRange, 0);
+        ViewHelper.setTranslationX(mLeftView, translationX);
 
         // 根据面板展开的百分比，修改侧滑菜单透明度
-        float alphaLeft=evaluate(percent,0.5f,1.0);
-        ViewHelper.setAlpha(mLeftView,alphaLeft);
+        float alphaLeft = evaluate(percent, 0.5f, 1.0);
+        ViewHelper.setAlpha(mLeftView, alphaLeft);
 
         // 根据面板展开的百分比，修改背景图的颜色
 
         // 根据面板展开的百分比，修改背景图的颜色
         int color = (Integer) evaluateColor(percent, Color.BLACK, Color.TRANSPARENT);
-        Logs.e("-getBackground:"+getBackground());
-        Logs.e("-  PorterDuff.Mode.SRC_OVER:"+  PorterDuff.Mode.SRC_OVER);
-        Logs.e("-color:"+color);
+        Logs.e("-getBackground:" + getBackground());
+        Logs.e("-  PorterDuff.Mode.SRC_OVER:" + PorterDuff.Mode.SRC_OVER);
+        Logs.e("-color:" + color);
         getBackground().setColorFilter(color, PorterDuff.Mode.SRC_OVER);
 
 
     }
-    /** 根据百分比，在起始颜色和最终颜色之间计算出一个过渡颜色 */
+
+    /**
+     * 根据百分比，在起始颜色和最终颜色之间计算出一个过渡颜色
+     */
     public Object evaluateColor(float fraction, Object startValue, Object endValue) {
         int startInt = (Integer) startValue;
         int startA = (startInt >> 24) & 0xff;
@@ -282,16 +285,20 @@ public class DragLayoutView extends FrameLayout {
         int endG = (endInt >> 8) & 0xff;
         int endB = endInt & 0xff;
 
-        return (int)((startA + (int)(fraction * (endA - startA))) << 24) |
-                (int)((startR + (int)(fraction * (endR - startR))) << 16) |
-                (int)((startG + (int)(fraction * (endG - startG))) << 8) |
-                (int)((startB + (int)(fraction * (endB - startB))));
+        return (int) ((startA + (int) (fraction * (endA - startA))) << 24) |
+                (int) ((startR + (int) (fraction * (endR - startR))) << 16) |
+                (int) ((startG + (int) (fraction * (endG - startG))) << 8) |
+                (int) ((startB + (int) (fraction * (endB - startB))));
     }
-    /** 根据百分比，在最大值和最小值之间算出一个过渡值 */
+
+    /**
+     * 根据百分比，在最大值和最小值之间算出一个过渡值
+     */
     public Float evaluate(float fraction, Number startValue, Number endValue) {
         float startFloat = startValue.floatValue();
         return startFloat + fraction * (endValue.floatValue() - startFloat);
     }
+
     /**
      * 根据当前面板的 在移动过程中改变的位置 来回调
      * 位置，计算展开状态
@@ -307,7 +314,7 @@ public class DragLayoutView extends FrameLayout {
         return Status.DRAGING;
     }
 
-    private void open() {
+    public void open() {
         int left = mRange;
 
         if (dragHelper.smoothSlideViewTo(mContentView, left, 0)) {
@@ -315,7 +322,7 @@ public class DragLayoutView extends FrameLayout {
         }
     }
 
-    private void close() {
+    public void close() {
         int left = 0;
         if (dragHelper.smoothSlideViewTo(mContentView, left, 0)) {
             ViewCompat.postInvalidateOnAnimation(this);
@@ -348,17 +355,25 @@ public class DragLayoutView extends FrameLayout {
         return left;
     }
 
-
     @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
-        return dragHelper.shouldInterceptTouchEvent(event);
-    }
+    public boolean onInterceptTouchEvent(android.view.MotionEvent ev) {
+        //将Touch事件传递给ViewDragHelper
+        return dragHelper.shouldInterceptTouchEvent(ev) ;
+    };
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        dragHelper.processTouchEvent(event);
+
+        try {
+            //将Touch事件传递给ViewDragHelper
+            dragHelper.processTouchEvent(event);
+        } catch (Exception e) {
+        }
         return true;
     }
+
+
+
 
 
 }
