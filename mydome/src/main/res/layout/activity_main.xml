@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lyz.mydome.view.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/draglayout"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="com.lyz.mydome.MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/header" />
+
+        <ListView
+            android:id="@+id/lv_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+  >
+
+
+        <com.lyz.mydome.view.QuickIndexView
+            android:id="@+id/quick_letter"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:background="#f00" />
+
+
+        <com.lyz.mydome.view.ParallaxView
+
+            android:id="@+id/list_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/tv_center_letter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+           android:layout_centerInParent="true"
+            android:background="#999"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:textSize="40sp"
+            android:visibility="gone"
+        />
+    </RelativeLayout>
+    
+
+</com.lyz.mydome.view.DragLayout>
